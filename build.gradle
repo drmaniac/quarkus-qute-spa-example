@@ -1,0 +1,20 @@
+plugins {
+	id 'quarkus-convention'
+}
+
+dependencies {
+
+	implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+	implementation 'io.quarkus:quarkus-arc'
+	implementation 'io.quarkus:quarkus-resteasy-reactive'
+	implementation 'io.quarkus:quarkus-qute'
+	implementation 'io.quarkus:quarkus-smallrye-openapi'
+
+	implementation 'org.jboss.logmanager:log4j2-jboss-logmanager'
+
+	testImplementation 'io.quarkus:quarkus-junit5'
+	testImplementation 'io.rest-assured:rest-assured'
+}
+
+group 'de.pieczewski.qute'
+version '1.0.0-SNAPSHOT'

@@ -1,0 +1,23 @@
+plugins {
+	id 'java'
+	id 'spotless-convention'
+	id 'repository-convention'
+}
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+		vendor = JvmVendorSpec.ADOPTIUM
+	}
+}
+
+compileJava {
+	options.encoding = 'UTF-8'
+	options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+	options.encoding = 'UTF-8'
+}
+
+compileJava.dependsOn 'spotlessApply'

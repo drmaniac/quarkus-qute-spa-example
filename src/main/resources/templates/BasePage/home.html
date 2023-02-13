@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+
+<body>
+</body>
+<!DOCTYPE html>
+<html data-color-mode="dark" data-dark-theme="dark">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="/assets/primer.css" type="text/css" rel="stylesheet" />
+  <link href="https://unpkg.com/@primer/css@^20.2.4/dist/primer.css" type="text/css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">
+
+  <script defer src="https://unpkg.com/htmx.org@1.8.5"
+    integrity="sha384-7aHh9lqPYGYZ7sTHvzP1t3BAfLhYSTy9ArHdP3Xsr9/3TlGurYgcPBoFmXX2TX/w"
+    crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+
+  <title>{#insert title}Shop-UI{/}</title>
+</head>
+
+<body id="body" class="overflow-hidden">
+  <header class="Header border flex-row" style="z-index: 1;">
+    {#fragment id=headerTitle}
+    <div class="Header-item Header-item--full">
+      <a href="/" class="Header-link f4 d-flex flex-items-center">
+        <span>{title}</span>
+      </a>
+    </div>
+    {/fragment}
+
+    <div id="notifications" class="position-fixed top-0 right-0 mt-3 mr-3" style="z-index: 1000;">
+      {!! TODO add notiifications !}
+      <span id="content-load-indicator" class="Label mt-3 htmx-indicator"><span>Loading</span><span class="AnimatedEllipsis"></span></span><br>
+    </div>
+  </header>
+
+  <div class="Layout pt-2" style="height: calc(100vh - 110px);">
+    <div id="navigation" class="Layout-sidebar overflow-auto" hx-trigger="navigation" hx-get="/p/navigation" hx-swap="innerHTML">
+      {#fragment id=navigation}
+      {#navigation}{/}
+      {/fragment}
+    </div>
+    <div class="Layout-main pr-3 overflow-auto " style="height: calc(100vh - 120px);">
+    <div id="content" hx-target="content" hx-swap-oob="true" hx-indicator="#content-load-indicator">
+      {! <img class="htmx-indicator" src="/spinner.gif"> !}
+      {#fragment id=content}
+        {content.raw}
+      {/fragment}
+    </div>
+    </div>
+  </div>
+
+  <footer class="row footer text-center " style="position: absolute; bottom: 0; width: 100%; padding: 15px;">
+    {#include /footer.html}{/}
+  </footer>
+
+</body>
+
+</html>
