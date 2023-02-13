@@ -2,7 +2,6 @@ package de.pieczewski.qute.page;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 import javax.ws.rs.GET;
@@ -21,7 +20,7 @@ public class ListPage {
 
     private static final Logger LOGGER = LogManager.getLogger(ListPage.class);
 
-    private static final int SIZE = 10;
+    private static final int SIZE = 15;
 
     @CheckedTemplate
     public static class ListTemplates {
@@ -53,6 +52,6 @@ public class ListPage {
         }
         var start = (page*SIZE)+1;
         var end = start+SIZE;
-        return IntStream.rangeClosed(start,end).mapToObj(i -> String.format("Element%04d", i)).toList();
+        return IntStream.range(start,end).mapToObj(i -> String.format("Element%04d", i)).toList();
     }
 }
