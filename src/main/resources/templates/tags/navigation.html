@@ -1,16 +1,15 @@
 <nav class="SideNav" style="max-width: 360px">
-  <a class="SideNav-item" href="#" {#if !path.equals("home")} hx-get="/p/content/home" hx-target="#content" hx-indicator="#content-load-indicator"{#else} aria-current="true" {/if} >
+  <button class="SideNav-item" {#if !path.equals("home")} hx-get="/p/content/home" hx-target="#content" hx-indicator="#content-load-indicator"{#else} aria-current="true" {/if} >
     <i class="ti ti-home"></i> Home
-  </a>
-  <a class="SideNav-item" href="#" {#if !path.equals("list")} hx-get="/p/content/list" hx-target="#content" hx-indicator="#content-load-indicator"{#else} aria-current="true" {/if}>
+  </button>
+  <button class="SideNav-item" {#if !path.equals("list")} hx-get="/p/content/list" hx-target="#content" hx-indicator="#content-load-indicator"{#else} aria-current="true" {/if}>
     <i class="ti ti-list"></i> List
-  </a>
+  </button>
 </nav>
-<p/>
+<p />
 <nav class="SideNav" style="max-width: 360px">
   <a class="SideNav-item" href="#url" aria-current="false"><i class="ti ti-book"></i> Shop catalogs</a>
   <a class="SideNav-item" href="#url" aria-current="false"><i class="ti ti-packages"></i> Articles</a>
   <a class="SideNav-item" href="#url" aria-current="false"><i class="ti ti-notification"></i> Notifications</a>
 </nav>
 <script>window.location</script>
-<h1>PAGE: {path}</h1>

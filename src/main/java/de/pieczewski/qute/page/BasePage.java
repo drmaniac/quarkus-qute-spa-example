@@ -1,5 +1,6 @@
 package de.pieczewski.qute.page;
 
+import de.pieczewski.qute.htmx.HTMX;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
 import io.smallrye.mutiny.Uni;
@@ -22,11 +23,6 @@ import org.jboss.resteasy.reactive.server.jaxrs.RestResponseBuilderImpl;
 public class BasePage {
 
     private static final Logger LOGGER = LogManager.getLogger(BasePage.class);
-
-    private static final String HX_TRIGGER = "HX-Trigger";
-    private static final String HX_TRIGGER_AFTER_SETTLE = "HX-Trigger-After-Settle";
-    private static final String HX_TRIGGER_AFTER_SWAP = "HX-Trigger-After-Swap";
-    private static final String HX_PUSH = "HX-Push";
     private static final String PATH_PREFIX = "/p";
 
     @CheckedTemplate
@@ -42,21 +38,29 @@ public class BasePage {
 
     @GET
     @Path("/{pageId:(?!content$|navigation$).*}")
-    @ResponseHeader(name = HX_TRIGGER_AFTER_SWAP, value = "content")
+    @ResponseHeader(name = HTMX.HX_TRIGGER_AFTER_SWAP, value = "content")
     public Uni<RestResponse<String>> page(@PathParam("pageId") Optional<String> path) {
         LOGGER.debug("render page {}", () -> path.orElse("home"));
         return Uni.createFrom()
                 .item(
-                        RestResponseBuilderImpl.ok(
-                                        Templates.home(
-                                                        "SPA example",
-                                                        path.orElse("home"),
-                                                        renderContent(path))
-                                                .render())
-                                .header(HX_TRIGGER_AFTER_SWAP, "content")
-                                .header(HX_PUSH, getPushUri(path))
-                                .cookie(cookieOf("path", path.orElse("home")))
-                                .build());
+                        createResponse(
+                                path.orElse("home"),
+                                getPushUri(path),
+                                "content",
+                                renderBasePage(path)));
+    }
+
+    private RestResponse<String> createResponse(
+            String path, String pushUri, String swap, String page) {
+        return RestResponseBuilderImpl.ok(page)
+                .header(HTMX.HX_TRIGGER_AFTER_SWAP, swap)
+                .header(HTMX.HX_PUSH, pushUri)
+                .cookie(cookieOf("path", path))
+                .build();
+    }
+
+    private String renderBasePage(Optional<String> path) {
+        return Templates.home("SPA example", path.orElse("home"), getContent(path)).render();
     }
 
     private String getPushUri(Optional<String> path) {
@@ -75,27 +79,26 @@ public class BasePage {
     public Uni<RestResponse<String>> content(@PathParam("pageId") Optional<String> path)
             throws InterruptedException {
         LOGGER.debug("get fresh content fragment: {}", () -> path);
-        var content = renderContent(path);
         return Uni.createFrom()
                 .item(
-                        RestResponseBuilderImpl.ok(Templates.home$content(content).render())
-                                .header(HX_TRIGGER_AFTER_SWAP, "navigation")
-                                // .header(HX_TRIGGER_AFTER_SWAP, "content")
-                                .header(HX_PUSH, getPushUri(path))
-                                .cookie(cookieOf("path", path.get()))
-                                .build());
+                        createResponse(
+                                path.orElse("hpme"),
+                                getPushUri(path),
+                                "navigation",
+                                Templates.home$content(getContent(path)).render()));
     }
 
-    private String renderContent(Optional<String> path) {
+    private String getContent(Optional<String> path) {
         return path.map(String::toUpperCase)
-                .map(
-                        page -> {
-                            return switch (page) {
-                                case "LIST" -> ListPage.list().render();
-                                default -> Templates.error_404().render();
-                            };
-                        })
+                .map(this::renderPage)
                 .orElse(Templates.error_404().render());
+    }
+
+    private String renderPage(String path) {
+        return switch (path) {
+            case "LIST" -> ListPage.list().render();
+            default -> Templates.error_404().render();
+        };
     }
 
     private NewCookie cookieOf(String name, String value) {
