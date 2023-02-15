@@ -5,11 +5,13 @@
   <button class="SideNav-item" {#if !path.equals("list")} hx-get="/p/content/list" hx-target="#content" hx-indicator="#content-load-indicator"{#else} aria-current="true" {/if}>
     <i class="ti ti-list"></i> List
   </button>
+  <button class="SideNav-item" {#if !path.equals("todos")} hx-get="/p/content/todos" hx-target="#content" hx-indicator="#content-load-indicator"{#else} aria-current="true" {/if}>
+    <i class="ti ti-checklist"></i> Todo's
+  </button>
 </nav>
 <p />
-<nav class="SideNav" style="max-width: 360px">
+<!-- <nav class="SideNav" style="max-width: 360px">
   <a class="SideNav-item" href="#url" aria-current="false"><i class="ti ti-book"></i> Shop catalogs</a>
   <a class="SideNav-item" href="#url" aria-current="false"><i class="ti ti-packages"></i> Articles</a>
   <a class="SideNav-item" href="#url" aria-current="false"><i class="ti ti-notification"></i> Notifications</a>
-</nav>
-<script>window.location</script>
+</nav> -->
