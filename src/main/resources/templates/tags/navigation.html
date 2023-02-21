@@ -1,13 +1,13 @@
 <nav class="SideNav" style="max-width: 360px">
-  <button class="SideNav-item" {#if !path.equals("home")} hx-get="/p/content/home" hx-target="#content" hx-indicator="#content-load-indicator"{#else} aria-current="true" {/if} >
+  <a class="SideNav-item" {#if !path.equals("home")} href="/p/home" hx-get="/p/content/home" hx-target="#content" hx-indicator="#content-load-indicator"{#else} aria-current="true" {/if} >
     <i class="ti ti-home"></i> Home
-  </button>
-  <button class="SideNav-item" {#if !path.equals("list")} hx-get="/p/content/list" hx-target="#content" hx-indicator="#content-load-indicator"{#else} aria-current="true" {/if}>
+  </a>
+  <a class="SideNav-item" {#if !path.equals("list")} href="/p/list"  hx-get="/p/content/list" hx-target="#content" hx-indicator="#content-load-indicator"{#else} aria-current="true" {/if}>
     <i class="ti ti-list"></i> List
-  </button>
-  <button class="SideNav-item" {#if !path.equals("todos")} hx-get="/p/content/todos" hx-target="#content" hx-indicator="#content-load-indicator"{#else} aria-current="true" {/if}>
+  </a>
+  <a class="SideNav-item" {#if !path.equals("todos")} href="/p/todos" hx-get="/p/content/todos" hx-target="#content" hx-indicator="#content-load-indicator" {#else} aria-current="true" {/if}>
     <i class="ti ti-checklist"></i> Todo's
-  </button>
+  </a>
 </nav>
 <p />
 <!-- <nav class="SideNav" style="max-width: 360px">

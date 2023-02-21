@@ -5,15 +5,14 @@
     </div>
     {#fragment id=listElements}
     {#for element in elements}
-    {#if element_hasNext || nextPage < 0}
-    <div class="Box-row">
+    {#if element_hasNext || nextPage < 0} <div class="Box-row">
       {#else}
-    <div class="Box-row" hx-get="/p/content/template/list?page={nextPage}" hx-trigger="intersect once" hx-swap="afterend"
-        hx-indicator="#content-load-indicator" hx-target="this">
-    {/if}
-      {element}
-    </div>
-    {/for}
-    {/fragment}
-    </div>
+      <div class="Box-row" hx-get="/p/content/fragment/list?page={nextPage}" hx-trigger="intersect once"
+        hx-swap="afterend" hx-indicator="#content-load-indicator" hx-target="this">
+        {/if}
+        {element}
+      </div>
+      {/for}
+      {/fragment}
   </div>
+</div>

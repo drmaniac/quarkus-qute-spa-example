@@ -1,0 +1,81 @@
+
+<div class="container-xl overflow-auto">
+	<div id="todo-container" class="Box Box--condensed">
+		<div class="Box-header d-flex">
+			<div class="col-2 d-inline-block text-bold">
+				ID
+			</div>
+			<div class="col-2 d-inline-block text-bold">
+				Summary
+			</div>
+			<div class="col-2 d-inline-block text-bold overflow-hidden flex-auto">
+				Description
+			</div>
+			<div class="col-2 d-inline-block text-right">
+
+				<details id="details" class="details-overlay details-overlay-dark">
+					<summary class="btn btn-primary" aria-haspopup="dialog" onclick="resetTodoForm(); focusElement('summary')" hx-get="/p/content/fragment/todo/{id or '12213'}" hx-target="#element_edit" ><i class="ti ti-plus"></i></summary>
+					{#fragment id=element_edit}
+					<div id="element_edit" class="Box position-fixed top-12" style="z-index: 112; right: calc(100vw/3)">
+						<div class="Box-header">
+							<h3 class="Box-title">Create/edit todo</h3>
+						</div>
+							<div class="Box-body overflow-auto">
+								<form hx-post="/p/content/fragment/todo" enctype="multipart/form-data" 
+									{#if id == 0L}
+										hx-target="#todo-container"
+										hx-swap="beforeend">
+									{#else}
+										hx-target="#element-{id}"
+										hx-swap="outerHTML">
+									{/if}
+									<input name="id" id="id" type="text" value="{id}"  />
+									<div class="form-group">
+										<label for="summary">Summary</label>
+										<input type="text" class="form-control" name="summary" id="summary" placeholder="Summary" value="{todo.summary or ''}">
+									</div>
+									<div class="form-group">
+										<label for="description">Description</label>
+										<textarea type="text" class="form-control" name="description" id="description"
+											placeholder="Description">{todo.description or ''}</textarea>
+									</div>
+									
+									<button type="reset" class="btn" onclick="closeModal('details')">Cancel</button>
+									<button type="submit" class="btn btn-primary" onclick="closeModal('details')">Submit</button>
+								</form>
+						</div>
+					</div>
+					{/fragment}
+				</details>
+			</div>
+		</div>
+
+		{#each todos}
+		{#fragment id=element}
+		<div class="Box-row d-flex" id="element-{it.id}">
+			<div class="col-2 d-inline-block">
+				{it.getId}
+			</div>
+			<div class="col-2 d-inline-block">
+				{it.getSummary}
+			</div>
+			<div class="col-2 d-inline-block overflow-hidden flex-auto">
+				<span class="Truncate-text" style="max-width: 300px;">
+					{it.getDescription}
+				</span>
+			</div>
+			<div class="col-2 d-inline-block text-right">
+				<button class="btn btn-plain tooltipped tooltipped-w" aria-label="Edit this Todo" onclick="openModal('details')" hx-get="/p/content/fragment/todo/{it.getId}" hx-target="#element_edit">
+					<i class=" ti ti-edit"></i>
+				</button>
+				<button class="btn btn-danger tooltipped tooltipped-w" aria-label="Delete this Todo"
+					hx-delete="/p/content/fragment/todo/{it.id}" hx-target="#element-{it.id}" hx-swap="outerHTML">
+					<i class="ti ti-trash"></i>
+				</button>
+			</div>
+		</div>
+		{/fragment}
+		{/each}
+
+	</div>
+</div>

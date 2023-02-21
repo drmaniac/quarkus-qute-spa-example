@@ -15,7 +15,9 @@
 
   <script defer src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
 
-  <title>{#insert title}Shop-UI{/}</title>
+  <script defer src="/js/spa-example.js"></script>
+
+  <title>{#insert title}SPA-Example{/}</title>
 </head>
 
 <body id="body" class="overflow-hidden">
@@ -41,14 +43,15 @@
       {/fragment}
     </div>
     <div class="Layout-main pr-3 overflow-auto " style="height: calc(100vh - 120px);">
-    <div id="content" hx-target="content" hx-swap-oob="true" hx-indicator="#content-load-indicator">
+    <div id="content" hx-swap-oob="true" hx-indicator="#content-load-indicator">
       {! <img class="htmx-indicator" src="/spinner.gif"> !}
       {#fragment id=content}
         {content.raw}
       {/fragment}
     </div>
-    </div>
+    </div>  
   </div>
+
 
   <footer class="row footer text-center " style="position: absolute; bottom: 0; width: 100%; padding: 15px;">
     {#include /footer.html}{/}
