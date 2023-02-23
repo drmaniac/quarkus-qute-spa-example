@@ -21,6 +21,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /** The todos page. */
+@SuppressWarnings("java:S1135")
 @Path("/p/content/fragment/todo")
 @Produces(MediaType.TEXT_HTML)
 public class TodosPage implements RenderablePage {

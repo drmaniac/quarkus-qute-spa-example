@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import org.junit.jupiter.api.Test;
 
 @QuarkusTest
-public class TodoServiceTest {
+class TodoServiceTest {
 
     @Inject TodoService todoService;
 

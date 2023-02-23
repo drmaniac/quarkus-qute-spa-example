@@ -12,7 +12,7 @@ import java.io.IOException;
 import org.junit.jupiter.api.Test;
 
 @QuarkusTest
-public class BasePageTest {
+class BasePageTest {
 
     @Test
     void testBasePage() throws IOException {

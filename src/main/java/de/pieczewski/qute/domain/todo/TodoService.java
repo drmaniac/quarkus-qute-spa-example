@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 /** Service class for managing todos. */
 @RequestScoped
-@SuppressWarnings("java:S3252")
+@SuppressWarnings({"java:S3252", "java:S1135"})
 public class TodoService {
 
     private static final Logger LOGGER = LogManager.getLogger(TodoService.class);

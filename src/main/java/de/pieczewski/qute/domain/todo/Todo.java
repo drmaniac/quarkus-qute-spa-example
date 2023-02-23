@@ -8,6 +8,7 @@ import javax.persistence.SequenceGenerator;
 import javax.ws.rs.FormParam;
 
 /** The todo entity. */
+@SuppressWarnings("java:S1135")
 @Entity
 public class Todo extends PanacheEntityBase {
 
