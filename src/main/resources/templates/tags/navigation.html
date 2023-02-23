@@ -1,3 +1,4 @@
+<!-- navigation start -->
 <nav class="SideNav" style="max-width: 360px">
   <a class="SideNav-item" {#if !path.equals("home")} href="/p/home" hx-get="/p/content/home" hx-target="#content" hx-indicator="#content-load-indicator"{#else} aria-current="true" {/if} >
     <i class="ti ti-home"></i> Home
@@ -10,8 +11,4 @@
   </a>
 </nav>
 <p />
-<!-- <nav class="SideNav" style="max-width: 360px">
-  <a class="SideNav-item" href="#url" aria-current="false"><i class="ti ti-book"></i> Shop catalogs</a>
-  <a class="SideNav-item" href="#url" aria-current="false"><i class="ti ti-packages"></i> Articles</a>
-  <a class="SideNav-item" href="#url" aria-current="false"><i class="ti ti-notification"></i> Notifications</a>
-</nav> -->
+<!-- navigation end -->

@@ -2,6 +2,7 @@ plugins {
 	id 'java'
 	id 'spotless-convention'
 	id 'repository-convention'
+	id 'jacoco'
 }
 
 java {
@@ -21,3 +22,11 @@ compileTestJava {
 }
 
 compileJava.dependsOn 'spotlessApply'
+
+jacocoTestReport {
+	reports {
+				xml.required = true
+				csv.required = false
+				html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+	}
+}

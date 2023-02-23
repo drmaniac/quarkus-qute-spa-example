@@ -93,9 +93,13 @@ public class TodosPage implements RenderablePage {
      * @return the updated todo
      */
     private Uni<Todo> createOrUpdate(Todo newTodo, Todo oldTodo) {
-        return oldTodo == null || oldTodo.getId() == 0
+        return isOldTodoPersisted(oldTodo)
                 ? todoService.create(newTodo)
                 : todoService.updateByRef(newTodo, oldTodo);
+    }
+
+    private boolean isOldTodoPersisted(Todo oldTodo) {
+        return oldTodo == null || oldTodo.getId() == null || oldTodo.getId() == 0;
     }
 
     /**

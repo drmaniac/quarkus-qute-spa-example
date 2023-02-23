@@ -13,6 +13,7 @@ repositories {
 dependencies {
 	implementation "com.diffplug.spotless:spotless-plugin-gradle:${spotlessPluginVersion}"
 	implementation "io.quarkus:io.quarkus.gradle.plugin:${quarkusPluginVersion}"
+	implementation "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${sonarPluginVersion}"
 }
 
 spotless {

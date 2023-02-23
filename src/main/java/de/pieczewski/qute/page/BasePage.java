@@ -49,6 +49,7 @@ public class BasePage {
     }
 
     @Inject PageSelector pageSelector;
+
     /**
      * Render the base page with the given path.
      *
@@ -142,10 +143,11 @@ public class BasePage {
      * @param pageId the path
      * @return the content
      */
+    @SuppressWarnings("java:S3655")
     private Uni<String> getContent(Optional<String> pageId) {
         return pageId.map(String::toUpperCase) // convert to upper case
                 .map(this::renderPage) // render the page
-                .orElse(renderErrorPage(pageId)); // render the error page
+                .get(); // renderPage is never empty
     }
 
     /**
@@ -154,8 +156,8 @@ public class BasePage {
      * @param pageId the page id
      * @return the error page
      */
-    private Uni<String> renderErrorPage(Optional<String> pageId) {
-        return Templates.error_404(pageId.orElseGet(() -> "unknown path")).createUni();
+    private Uni<String> renderErrorPage(String pageId) {
+        return Templates.error_404(pageId).createUni();
     }
 
     /**
@@ -168,7 +170,7 @@ public class BasePage {
         return pageSelector
                 .select(path) // select the page
                 .map(page -> page.renderTemplate()) // render the template
-                .orElseGet(() -> Templates.error_404(path).createUni()); // render the error page
+                .orElseGet(() -> renderErrorPage(path)); // render the error page
     }
 
     /**

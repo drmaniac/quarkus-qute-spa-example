@@ -1,0 +1,5 @@
+plugins {
+	id "org.sonarqube"
+}
+
+project.tasks["sonar"].dependsOn "jacocoTestReport"

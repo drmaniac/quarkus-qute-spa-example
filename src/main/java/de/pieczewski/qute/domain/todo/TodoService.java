@@ -4,6 +4,7 @@ import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
 import io.quarkus.hibernate.reactive.panache.common.runtime.ReactiveTransactional;
 import io.smallrye.mutiny.Uni;
 import java.util.List;
+import java.util.Objects;
 import javax.enterprise.context.RequestScoped;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -72,6 +73,9 @@ public class TodoService {
     public Uni<Todo> updateByRef(Todo todo, PanacheEntityBase ref) {
         LOGGER.debug("update todo entity: {} with new: {}", ref, todo);
         Todo oldTodo = (Todo) ref; // Cast to Todo
+        if (Objects.isNull(oldTodo) || Objects.isNull(oldTodo.getId()) || oldTodo.getId() == 0L) {
+            return Uni.createFrom().failure(new NullPointerException("reference is not persisted"));
+        }
         oldTodo.setDescription(todo.description);
         oldTodo.setSummary(todo.summary);
         return oldTodo.persist();
@@ -85,6 +89,12 @@ public class TodoService {
      */
     public Uni<Todo> findById(Long id) {
         LOGGER.debug("find todo by id: {}", id);
-        return Todo.findById(id).map(Todo.class::cast).onFailure().recoverWithItem(Todo::new);
+        return Todo.findById(id)
+                .map(Todo.class::cast)
+                .chain(
+                        todo ->
+                                todo != null
+                                        ? Uni.createFrom().item(todo)
+                                        : Uni.createFrom().item(new Todo()));
     }
 }
