@@ -185,6 +185,6 @@ public class BasePage {
     @SuppressWarnings("java:S2092")
     private NewCookie unsecureCookieOf(String name, String value) {
         LOGGER.debug("create cookie {}={}", name, value);
-        return new NewCookie(name, value, PATH_PREFIX, null, null, -1, false);
+        return new NewCookie(name, value, PATH_PREFIX, null, null, -1, false, true);
     }
 }
