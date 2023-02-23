@@ -36,6 +36,7 @@ public class PageSelector {
      * @return the page or an empty optional
      */
     public Optional<RenderablePage> select(String pageId) {
+        LOGGER.debug("Selecting page with id {}", pageId);
         var page = templates.get(pageId);
         return page == null ? Optional.empty() : Optional.of(page);
     }
