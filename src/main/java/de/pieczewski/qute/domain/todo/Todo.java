@@ -1,5 +1,6 @@
 package de.pieczewski.qute.domain.todo;
 
+import de.pieczewski.qute.annotations.ExcludeFromCoverageGenerated;
 import io.quarkus.hibernate.reactive.panache.PanacheEntityBase;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import javax.ws.rs.FormParam;
 /** The todo entity. */
 @SuppressWarnings("java:S1135")
 @Entity
+@ExcludeFromCoverageGenerated
 public class Todo extends PanacheEntityBase {
 
     @SequenceGenerator(
