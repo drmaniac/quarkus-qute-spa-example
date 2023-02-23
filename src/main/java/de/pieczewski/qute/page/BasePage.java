@@ -83,7 +83,9 @@ public class BasePage {
                 ResponseBuilder.ok(content) // create the response
                                 .header(HTMX.HX_TRIGGER_AFTER_SWAP, swap) // set the swap function
                                 .header(HTMX.HX_PUSH, pushUri) // set the push uri
-                                .cookie(cookieOf(COOKIE_PATH_KEY, path)) // set the path cookie
+                                .cookie(
+                                        unsecureCookieOf(
+                                                COOKIE_PATH_KEY, path)) // set the path cookie
                                 .build()); // build the response
     }
 
@@ -180,7 +182,8 @@ public class BasePage {
      * @param value the value
      * @return the cookie
      */
-    private NewCookie cookieOf(String name, String value) {
+    @SuppressWarnings("java:S2092")
+    private NewCookie unsecureCookieOf(String name, String value) {
         LOGGER.debug("create cookie {}={}", name, value);
         return new NewCookie(name, value, PATH_PREFIX, null, null, -1, false);
     }
