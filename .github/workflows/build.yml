@@ -43,3 +43,9 @@ jobs:
       uses: gradle/gradle-build-action@v2
       with:
         arguments: jacocoTestReport --rerun-tasks sonar
+    - name: Test Reports
+      uses: xportation/junit-coverage-report@main
+      with:
+        junit-path: ./test-results/test/*.xml
+        coverage-path: ./reports/jacoco/test/coverage.xml
+

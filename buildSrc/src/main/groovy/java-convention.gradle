@@ -26,7 +26,7 @@ compileJava.dependsOn 'spotlessApply'
 jacocoTestReport {
 	reports {
 				xml.required = true
+				xml.destination file("build/reports/jacoco/test/coverage.xml")
 				csv.required = false
-				html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
 	}
 }
