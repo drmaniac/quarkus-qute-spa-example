@@ -15,6 +15,7 @@ on:
 
 permissions:
   contents: read
+  checks: write
 
 env:
   GRADLE_OPTS: |
@@ -49,5 +50,4 @@ jobs:
           name: JUnit Test
           path: ./build/test-results/test/*.xml # Path to test results
           reporter: java-junit
-          token: ${{ secrets.REPORT_TOKEN }}
           #coverage-path: ./build/reports/jacoco/test/coverage.xml
