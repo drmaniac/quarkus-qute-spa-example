@@ -21,7 +21,7 @@ public class ListPage implements RenderablePage {
     private static final Logger LOGGER = LogManager.getLogger(ListPage.class);
 
     private static final int SIZE = 15;
-    private static final int MAX_PAGES = 1000;
+    public static final int MAX_PAGES = 1000;
 
     @CheckedTemplate
     @SuppressWarnings({"java:S1118", "java:S100", "java:S117"})

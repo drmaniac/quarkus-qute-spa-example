@@ -5,6 +5,7 @@ import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.endsWith;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.text.IsEmptyString.emptyString;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import de.pieczewski.qute.domain.todo.Todo;
@@ -33,7 +34,7 @@ class TodosPageTest {
                 .delete("/p/content/fragment/todo/" + todoEntity.getId())
                 .then()
                 .statusCode(200)
-                .body(is("")); // empty body
+                .body(is(emptyString())); // empty body
     }
 
     @Test

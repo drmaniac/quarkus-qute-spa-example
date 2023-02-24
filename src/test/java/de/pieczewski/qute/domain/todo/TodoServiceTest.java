@@ -31,6 +31,20 @@ class TodoServiceTest {
     }
 
     @Test
+    void testUpdate() {
+        var todoToUpdate = new Todo();
+        todoToUpdate.setId(92000L);
+        todoToUpdate.setSummary("new summary");
+        todoToUpdate.setDescription("new description");
+
+        var updated = todoService.update(todoToUpdate).await().atMost(Duration.ofSeconds(1L));
+        assertNotNull(updated);
+        assertEquals(92000L, updated.id);
+        assertEquals("new summary", updated.summary);
+        assertEquals("new description", updated.description);
+    }
+
+    @Test
     void testUpdateByRef() {
         var ref = todoService.findById(10000L).await().atMost(Duration.ofSeconds(2L));
         var oldSummary = ref.getSummary();

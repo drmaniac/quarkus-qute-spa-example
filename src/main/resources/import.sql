@@ -24,4 +24,9 @@ INSERT
         91001,
         'TodoPageTest-testGetElementEdit',
         'To be updated'
+    ),
+    (
+        92000,
+        'TodoServiceTest-testUpdate',
+        'To be updated'
     );
