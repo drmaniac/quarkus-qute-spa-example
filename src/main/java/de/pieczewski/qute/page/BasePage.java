@@ -1,5 +1,6 @@
 package de.pieczewski.qute.page;
 
+import de.pieczewski.qute.annotations.ExcludeFromGeneratedCoverage;
 import de.pieczewski.qute.htmx.HTMX;
 import de.pieczewski.qute.page.services.PageSelector;
 import io.quarkus.qute.CheckedTemplate;
@@ -38,6 +39,7 @@ public class BasePage {
 
     @CheckedTemplate
     @SuppressWarnings({"java:S1118", "java:S100", "java:S117"})
+    @ExcludeFromGeneratedCoverage
     public static class Templates {
         public static native TemplateInstance home(String title, String path, Uni<String> content);
 

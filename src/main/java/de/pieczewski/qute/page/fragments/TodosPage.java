@@ -1,5 +1,6 @@
 package de.pieczewski.qute.page.fragments;
 
+import de.pieczewski.qute.annotations.ExcludeFromGeneratedCoverage;
 import de.pieczewski.qute.domain.todo.Todo;
 import de.pieczewski.qute.domain.todo.TodoService;
 import de.pieczewski.qute.page.interfaces.RenderablePage;
@@ -32,6 +33,7 @@ public class TodosPage implements RenderablePage {
 
     @CheckedTemplate
     @SuppressWarnings({"java:S1118", "java:S100", "java:S117"})
+    @ExcludeFromGeneratedCoverage
     public static class TodoTemplates {
         public static native TemplateInstance todos(List<Todo> todos, Long id, Todo todo);
 

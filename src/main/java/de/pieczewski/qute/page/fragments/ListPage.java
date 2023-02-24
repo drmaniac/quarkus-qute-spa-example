@@ -1,5 +1,6 @@
 package de.pieczewski.qute.page.fragments;
 
+import de.pieczewski.qute.annotations.ExcludeFromGeneratedCoverage;
 import de.pieczewski.qute.page.interfaces.RenderablePage;
 import io.quarkus.qute.CheckedTemplate;
 import io.quarkus.qute.TemplateInstance;
@@ -24,6 +25,7 @@ public class ListPage implements RenderablePage {
 
     @CheckedTemplate
     @SuppressWarnings({"java:S1118", "java:S100", "java:S117"})
+    @ExcludeFromGeneratedCoverage
     public static class ListTemplates {
         public static native TemplateInstance list(List<String> elements, Integer nextPage);
 
