@@ -1,3 +1,5 @@
+[![Java CI with Gradle](https://github.com/drmaniac/quarkus-qute-spa-example/actions/workflows/build.yml/badge.svg)](https://github.com/drmaniac/quarkus-qute-spa-example/actions/workflows/build.yml)
+
 # quarkus spa example using qute and htmx
 
 Example Project using quarkus qute and htmx for a single page application.
