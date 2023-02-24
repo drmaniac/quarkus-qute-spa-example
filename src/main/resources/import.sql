@@ -14,4 +14,9 @@ INSERT
         nextval('todo_idx'),
         'Do other stufe',
         'Do it now'
+    ),
+    (
+        91000,
+        'TodoPageTest-testPostTodoEdit',
+        'To be updated'
     );
