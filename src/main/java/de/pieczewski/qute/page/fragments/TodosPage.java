@@ -102,7 +102,8 @@ public class TodosPage implements RenderablePage {
     }
 
     private boolean isOldTodoPersisted(Todo oldTodo) {
-        return oldTodo == null || oldTodo.getId() == null || oldTodo.getId() == 0;
+        // null id means that the todo is not persisted
+        return oldTodo.getId() == null;
     }
 
     /**

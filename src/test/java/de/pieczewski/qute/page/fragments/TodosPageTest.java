@@ -46,6 +46,15 @@ class TodosPageTest {
     }
 
     @Test
+    void testGetEmptyElementEdit() {
+        given().when()
+                .get("/p/content/fragment/todo/0")
+                .then()
+                .statusCode(200)
+                .body(containsString(" value=\"\""));
+    }
+
+    @Test
     void testPostTodoCreate() {
         given().when()
                 .contentType("multipart/form-data")
