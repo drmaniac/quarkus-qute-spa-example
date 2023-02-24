@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import org.junit.jupiter.api.Test;
 
 @QuarkusTest
-public class ListPageTest {
+class ListPageTest {
 
     @Inject ListPage listPage;
 
