@@ -16,6 +16,13 @@ on:
 permissions:
   contents: read
 
+env:
+  GRADLE_OPTS: |
+    -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+    -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
+    -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+    -Dsonar.projectName=${{ vars.SONAR_PROJECT_NAME }}
+
 jobs:
   build:
 
@@ -32,3 +39,7 @@ jobs:
       uses: gradle/gradle-build-action@v2
       with:
         arguments: build
+    - name: Sonarqube
+      uses: gradle/gradle-build-action@v2
+      with:
+        arguments: jacocoTestReport --rerun-tasks sonar
