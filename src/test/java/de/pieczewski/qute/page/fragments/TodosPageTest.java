@@ -39,10 +39,10 @@ class TodosPageTest {
     @Test
     void testGetElementEdit() {
         given().when()
-                .get("/p/content/fragment/todo/10000")
+                .get("/p/content/fragment/todo/91001")
                 .then()
                 .statusCode(200)
-                .body(containsString(" value=\"Do some stufe\""));
+                .body(containsString(" value=\"TodoPageTest-testGetElementEdit\""));
     }
 
     @Test
