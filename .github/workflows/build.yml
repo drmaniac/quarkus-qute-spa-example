@@ -9,9 +9,9 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -25,27 +25,28 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-    - name: Build with Gradle
-      uses: gradle/gradle-build-action@v2
-      with:
-        arguments: build
-    - name: Sonarqube
-      uses: gradle/gradle-build-action@v2
-      with:
-        arguments: jacocoTestReport --rerun-tasks sonar
-    - name: Test Reports
-      uses: xportation/junit-coverage-report@main
-      with:
-        junit-path: ./build/test-results/test/*.xml
-        coverage-path: ./build/reports/jacoco/test/coverage.xml
-
+      - uses: actions/checkout@v3
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: "17"
+          distribution: "temurin"
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: build
+      - name: Sonarqube
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: jacocoTestReport --rerun-tasks sonar
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: success() || failure() # run this step even if previous step failed
+        with:
+          name: JUnit Test
+          path: ./build/test-results/test/*.xml # Path to test results
+          reporter: java-junit
+          #coverage-path: ./build/reports/jacoco/test/coverage.xml
