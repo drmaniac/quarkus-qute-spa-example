@@ -2,8 +2,6 @@
 	"image": "mcr.microsoft.com/devcontainers/universal:2",
 	"features": {
 		"ghcr.io/devcontainers/features/java:1": {
-			"version": "17",
-			"gradleVersion": "8.0",
 			"installGradle": true
 		},
 		"ghcr.io/devcontainers-contrib/features/quarkus-sdkman:2": {},
